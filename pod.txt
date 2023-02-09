@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgres
+  labels:
+    tier: db-tier
+spec:
+  containers:
+    - name: postgres
+      image: postgres
+      env: 
+        - name: POSTGRES_PASSWORD
+          value: mysecretpassword
+
+		  
+		  
+		  
+		  
+We use kubectl run command with --dry-run=client -o yaml option to create a manifest file :-		  
+root@controlplane:~# kubectl run redis --image=redis123 --dry-run=client -o yaml > redis-definition.yaml
+
+
+After that, using kubectl create -f command to create a resource from the manifest file :-
+root@controlplane:~# kubectl create -f redis-definition.yaml 
+
+
+Use the kubectl edit command to update the image of the pod to redis.
+root@controlplane:~# kubectl edit pod redis
+
+If you used a pod definition file then update the image from redis123 to redis in the definition file via Vi or Nano editor and then run kubectl apply command to update the image :-
+root@controlplane:~# kubectl apply -f redis-definition.yaml 
